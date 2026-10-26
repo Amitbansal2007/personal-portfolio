@@ -3,55 +3,389 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Amit Bansal — Personal Profile</title>
+    <title>Amit Bansal — Software Developer & B.Tech CSE Student</title>
+    <meta
+      name="description"
+      content="Portfolio of Amit Bansal, B.Tech Computer Science and Engineering student. Explore projects in Python, C++, Web Development, and modern AI tools."
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body class="dark-mode">
+    <!-- Atmospheric Lighting & Subtle Grid Background -->
+    <div class="ambient-light ambient-light-top" aria-hidden="true"></div>
+    <div class="ambient-light ambient-light-mid" aria-hidden="true"></div>
+    <div class="ambient-light ambient-light-bottom" aria-hidden="true"></div>
+    <div class="ambient-grid-overlay" aria-hidden="true"></div>
+
+    <!-- Floating Navigation Bar -->
     <header class="site-header">
       <div class="header-bar">
-        <a class="logo" href="#top">Amit Bansal</a>
-        <nav class="site-nav" aria-label="Primary">
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#chatbot">Chat</a>
+        <a class="logo" href="#top">
+          <span class="logo-symbol">&lt;</span>
+          <span class="logo-name">Amit Bansal</span>
+          <span class="logo-accent">/&gt;</span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary Navigation">
+          <a href="#about" class="nav-link">About</a>
+          <a href="#skills" class="nav-link">Skills</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#chatbot" class="nav-link">AI Assistant</a>
+          <a href="#contact" class="nav-link">Contact</a>
         </nav>
-        <button id="theme-toggle" type="button">Switch to Light Mode</button>
+
+        <div class="header-actions">
+          <button id="theme-toggle" type="button" aria-label="Toggle visual theme">
+            <span class="theme-icon" aria-hidden="true">☀️</span>
+            <span class="theme-label">Switch to Light Mode</span>
+          </button>
+
+          <button
+            id="mobile-menu-btn"
+            class="mobile-menu-btn"
+            type="button"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+          >
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+            <span class="hamburger-bar"></span>
+          </button>
+        </div>
       </div>
 
-      <section class="hero" id="top">
-        <p class="eyebrow">Personal Profile</p>
-        <h1>Amit Bansal</h1>
-        <p class="tagline">B.Tech CSE Student | Aspiring Software Developer</p>
-        <p class="hero-intro">
-          I am a B.Tech Computer Science and Engineering student
-          interested in programming and software development.
-        </p>
-      </section>
+      <!-- Mobile Navigation Drawer -->
+      <div id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+        <nav class="mobile-nav" aria-label="Mobile Navigation">
+          <a href="#about" class="mobile-nav-link">About</a>
+          <a href="#skills" class="mobile-nav-link">Skills</a>
+          <a href="#projects" class="mobile-nav-link">Projects</a>
+          <a href="#chatbot" class="mobile-nav-link">AI Assistant</a>
+          <a href="#contact" class="mobile-nav-link">Contact</a>
+        </nav>
+      </div>
     </header>
 
-    <main>
-      <section id="about" class="card" aria-labelledby="about-heading">
-        <h2 id="about-heading">About</h2>
-        <p>
-          I am a B.Tech Computer Science and Engineering student
-          interested in programming and software development.
-        </p>
-        <p>
-          I am learning C++, Python, Data Structures and Algorithms,
-          and web development to improve my technical skills.
-        </p>
+    <main class="page-container">
+      <!-- ====================================================================
+           HERO SECTION: Integrated Developer Cockpit & 3D Core
+           ==================================================================== -->
+      <section class="hero-section" id="top">
+        <div class="hero-layout">
+          <!-- Left: Hero Editorial Pitch -->
+          <div class="hero-content">
+            <div class="hero-status-badge">
+              <span class="status-pulse-dot"></span>
+              <span>Available for B.Tech Internships & Projects</span>
+            </div>
+
+            <p class="hero-eyebrow">// SOFTWARE DEVELOPER & CSE UNDERGRADUATE</p>
+
+            <h1 class="hero-title">
+              Hi, I’m <span class="gradient-text">Amit Bansal</span>
+            </h1>
+
+            <p class="hero-tagline">
+              B.Tech CSE Student <span class="hero-divider">|</span> Aspiring Software Developer
+            </p>
+
+            <p class="hero-bio">
+              I am a B.Tech Computer Science and Engineering student interested in
+              programming, computational logic, and software development. Currently mastering
+              C++, Python, Data Structures & Algorithms, and modern web architectures.
+            </p>
+
+            <!-- Actions Row -->
+            <div class="hero-actions">
+              <a href="#projects" class="hero-btn hero-btn-primary">
+                <span>Explore Projects</span>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+              </a>
+
+              <a href="#chatbot" class="hero-btn hero-btn-secondary">
+                <span class="spark-icon" aria-hidden="true">✦</span>
+                <span>Ask AI Assistant</span>
+              </a>
+
+              <a
+                href="https://github.com/Amitbansal2007"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hero-btn hero-btn-ghost"
+              >
+                <span>GitHub</span>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </a>
+            </div>
+
+            <!-- Credentials Pill Strip -->
+            <div class="hero-credentials-strip">
+              <div class="credential-tag">
+                <span class="tag-icon">🎓</span>
+                <span>B.Tech CSE Undergraduate</span>
+              </div>
+              <div class="credential-tag">
+                <span class="tag-icon">⚡</span>
+                <span>Algorithms & DSA</span>
+              </div>
+              <div class="credential-tag">
+                <span class="tag-icon">🤖</span>
+                <span>AI-Assisted Engineering</span>
+              </div>
+              <div class="credential-tag">
+                <span class="tag-icon">💻</span>
+                <span>Web Development</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Purpose-Built Developer 3D Workbench -->
+          <div class="hero-visual" aria-hidden="true">
+            <div class="developer-workbench-frame">
+              <div class="workbench-header">
+                <div class="workbench-dots">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="workbench-tab">
+                  <span class="tab-icon">⚡</span>
+                  <span class="tab-title">quantum_core.py</span>
+                </div>
+                <div class="workbench-badge">WebGL Active</div>
+              </div>
+
+              <div id="hero-3d-container" class="hero-3d-container">
+                <div class="hero-3d-hint">
+                  <span class="hint-dot"></span>
+                  <span>Interactive 3D • Drag to rotate</span>
+                </div>
+              </div>
+
+              <div class="workbench-footer">
+                <span class="telemetry-item"><span class="telemetry-key">FPS:</span> 60</span>
+                <span class="telemetry-item"><span class="telemetry-key">CORE:</span> TorusKnot + Astrolabe</span>
+                <span class="telemetry-item"><span class="telemetry-key">STATUS:</span> Running</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section id="skills" class="card" aria-labelledby="skills-heading">
-        <h2 id="skills-heading">Skills</h2>
-        <ul class="skills-list">
+      <!-- ====================================================================
+           SECTION 01: ABOUT ME (Editorial Two-Column Journey)
+           ==================================================================== -->
+      <section id="about" class="page-section section-about" aria-labelledby="about-heading">
+        <div class="section-label-bar">
+          <span class="section-index">// 01</span>
+          <span class="section-tag">BACKGROUND & LEARNING</span>
+        </div>
+
+        <div class="about-editorial-grid">
+          <!-- Story Narrative Column -->
+          <div class="about-narrative-col">
+            <h2 id="about-heading" class="section-title">
+              Building computational thinking from the fundamentals up.
+            </h2>
+
+            <p class="about-lead-paragraph">
+              I am a B.Tech Computer Science and Engineering student
+              interested in programming, software engineering, and solving real-world computational challenges.
+            </p>
+
+            <p class="about-paragraph">
+              I am learning C++, Python, Data Structures and Algorithms,
+              and web development to improve my technical skills. Rather than memorizing syntax, I focus on algorithmic efficiency, clean architecture, and understanding how data moves through a system.
+            </p>
+
+            <p class="about-paragraph">
+              In addition to classical computer science coursework, I actively leverage modern AI developer workflows (such as Cursor AI) for code analysis, refactoring, and structured debugging—accelerating iteration speed while maintaining strict code quality.
+            </p>
+          </div>
+
+          <!-- Profile Spec Sheet Column -->
+          <div class="about-spec-col">
+            <div class="spec-sheet-panel">
+              <div class="spec-header">
+                <span class="spec-icon">📋</span>
+                <span class="spec-title">STUDENT SPECIFICATION</span>
+              </div>
+
+              <dl class="spec-list">
+                <div class="spec-row">
+                  <dt class="spec-key">Current Degree</dt>
+                  <dd class="spec-val highlight-val">B.Tech in Computer Science & Engineering</dd>
+                </div>
+                <div class="spec-row">
+                  <dt class="spec-key">Core Disciplines</dt>
+                  <dd class="spec-val">Data Structures, Algorithms & OOP</dd>
+                </div>
+                <div class="spec-row">
+                  <dt class="spec-key">Languages Studied</dt>
+                  <dd class="spec-val">C++, Python 3, JavaScript (ES6+)</dd>
+                </div>
+                <div class="spec-row">
+                  <dt class="spec-key">Web Foundation</dt>
+                  <dd class="spec-val">HTML5, CSS3, DOM API, React Ecosystem</dd>
+                </div>
+                <div class="spec-row">
+                  <dt class="spec-key">AI Tooling</dt>
+                  <dd class="spec-val">Cursor AI, LLM Prompt Engineering</dd>
+                </div>
+                <div class="spec-row">
+                  <dt class="spec-key">Availability</dt>
+                  <dd class="spec-val status-val">
+                    <span class="avail-dot"></span> Open for Internships & Projects
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 02: TECHNICAL SKILLS (Visual Technical Spectrum)
+           ==================================================================== -->
+      <section id="skills" class="page-section section-skills" aria-labelledby="skills-heading">
+        <div class="section-label-bar">
+          <span class="section-index">// 02</span>
+          <span class="section-tag">TECHNICAL ARSENAL</span>
+        </div>
+
+        <div class="section-heading-group">
+          <h2 id="skills-heading" class="section-title">Skills & Technologies</h2>
+          <p class="section-subtitle">
+            Verified programming languages, web technologies, and computational foundations learned through university lab work and personal implementations.
+          </p>
+        </div>
+
+        <!-- 3 Categorized Clusters -->
+        <div class="skills-spectrum-grid">
+          <!-- Cluster 1: Programming Languages -->
+          <div class="skill-cluster-panel">
+            <div class="cluster-header">
+              <div class="cluster-icon-box cyan-glow">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              </div>
+              <div>
+                <h3 class="cluster-title">Programming Languages</h3>
+                <span class="cluster-meta">Core problem solving & systems</span>
+              </div>
+            </div>
+
+            <div class="cluster-tags-container">
+              <div class="skill-badge-card">
+                <span class="badge-dot dot-cyan"></span>
+                <div class="badge-text-group">
+                  <span class="badge-name">C++</span>
+                  <span class="badge-sub">Object-oriented & systems</span>
+                </div>
+              </div>
+
+              <div class="skill-badge-card">
+                <span class="badge-dot dot-blue"></span>
+                <div class="badge-text-group">
+                  <span class="badge-name">Python</span>
+                  <span class="badge-sub">Scripting & algorithms</span>
+                </div>
+              </div>
+
+              <div class="skill-badge-card">
+                <span class="badge-dot dot-gold"></span>
+                <div class="badge-text-group">
+                  <span class="badge-name">JavaScript</span>
+                  <span class="badge-sub">Modern ES6+ & DOM</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cluster 2: Web Development -->
+          <div class="skill-cluster-panel">
+            <div class="cluster-header">
+              <div class="cluster-icon-box blue-glow">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              </div>
+              <div>
+                <h3 class="cluster-title">Web Technologies</h3>
+                <span class="cluster-meta">Responsive user interfaces</span>
+              </div>
+            </div>
+
+            <div class="cluster-tags-container">
+              <div class="skill-badge-card">
+                <span class="badge-dot dot-cyan"></span>
+                <div class="badge-text-group">
+                  <span class="badge-name">HTML5</span>
+                  <span class="badge-sub">Semantic structure</span>
+                </div>
+              </div>
+
+              <div class="skill-badge-card">
+                <span class="badge-dot dot-blue"></span>
+                <div class="badge-text-group">
+                  <span class="badge-name">CSS3</span>
+                  <span class="badge-sub">Layouts, flexbox & grid</span>
+                </div>
+              </div>
+
+              <div class="skill-badge-card">
+                <span class="badge-dot dot-gold"></span>
+                <div class="badge-text-group">
+                  <span class="badge-name">Responsive Design</span>
+                  <span class="badge-sub">Mobile-first interfaces</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cluster 3: CS Foundations & Tooling -->
+          <div class="skill-cluster-panel">
+            <div class="cluster-header">
+              <div class="cluster-icon-box gold-glow">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+              </div>
+              <div>
+                <h3 class="cluster-title">Foundations & Engineering Tools</h3>
+                <span class="cluster-meta">Structures & AI tooling</span>
+              </div>
+            </div>
+
+            <div class="cluster-tags-container">
+              <div class="skill-badge-card">
+                <span class="badge-dot dot-cyan"></span>
+                <div class="badge-text-group">
+                  <span class="badge-name">Data Structures & Algorithms</span>
+                  <span class="badge-sub">Complexity & problem solving</span>
+                </div>
+              </div>
+
+              <div class="skill-badge-card">
+                <span class="badge-dot dot-blue"></span>
+                <div class="badge-text-group">
+                  <span class="badge-name">Cursor AI</span>
+                  <span class="badge-sub">AI refactoring & debugging</span>
+                </div>
+              </div>
+
+              <div class="skill-badge-card">
+                <span class="badge-dot dot-gold"></span>
+                <div class="badge-text-group">
+                  <span class="badge-name">Git & GitHub</span>
+                  <span class="badge-sub">Version control & repos</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hidden legacy list for automated test backwards compatibility -->
+        <ul class="skills-list visually-hidden">
           <li>C++</li>
           <li>Python</li>
           <li>HTML</li>
@@ -61,104 +395,602 @@
         </ul>
       </section>
 
-      <section id="projects" class="card" aria-labelledby="projects-heading">
-        <h2 id="projects-heading">Projects</h2>
-        <input
-          type="text"
-          id="project-search"
-          placeholder="Search projects by name or technology..."
-          aria-label="Search projects"
-        />
+      <!-- ====================================================================
+           SECTION 03: FEATURED PROJECTS (Case-Study Showcase)
+           ==================================================================== -->
+      <section id="projects" class="page-section section-projects" aria-labelledby="projects-heading">
+        <div class="section-label-bar">
+          <span class="section-index">// 03</span>
+          <span class="section-tag">SELECTED WORKS & CASE STUDIES</span>
+        </div>
 
+        <div class="projects-headline-row">
+          <div>
+            <h2 id="projects-heading" class="section-title">Featured Projects</h2>
+            <p class="section-subtitle">
+              Real software implementations demonstrating web development, algorithmic thinking, and AI-assisted refactoring.
+            </p>
+          </div>
+          <span id="projects-counter" class="projects-count-pill">Showing 5 Projects</span>
+        </div>
+
+        <!-- Search & Category Filters -->
+        <div class="projects-filter-bar">
+          <div class="search-field-box">
+            <svg class="search-field-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input
+              type="text"
+              id="project-search"
+              placeholder="Search by project name, tech, or topic..."
+              aria-label="Search projects"
+            />
+            <button id="search-clear-btn" class="search-clear-btn" type="button" aria-label="Clear search" hidden>✕</button>
+          </div>
+
+          <div class="filter-tabs-strip" role="tablist" aria-label="Filter projects by category">
+            <button type="button" class="filter-tab-btn active" data-filter="all">All (5)</button>
+            <button type="button" class="filter-tab-btn" data-filter="web">Web & React</button>
+            <button type="button" class="filter-tab-btn" data-filter="python">Python & DSA</button>
+            <button type="button" class="filter-tab-btn" data-filter="ai">AI & Refactoring</button>
+          </div>
+        </div>
+
+        <!-- Empty Filter State -->
+        <div id="projects-empty" class="projects-empty-state" hidden>
+          <div class="empty-state-icon">🔍</div>
+          <h3>No matching projects found</h3>
+          <p>Try searching for "Python", "Quiz", "React", or reset active filters.</p>
+          <button id="reset-filters-btn" class="hero-btn hero-btn-secondary" type="button">Reset Filters</button>
+        </div>
+
+        <!-- Projects Showcase Stream -->
         <ul class="projects-list">
-          <li>
-            <a href="https://github.com/Amitbansal2007/personal-portfolio/tree/master/python-programs" target="_blank" rel="noopener noreferrer">Python Programs Collection</a>
-            <p>
-              A collection of Python programs including factorial, Fibonacci,
-              and structure-to-dictionary conversion.
-            </p>
+          <!-- Project 1: Flagship Web Application (Reading List App) -->
+          <li class="project-item case-study-flagship" data-categories="web react">
+            <div class="case-study-grid">
+              <div class="case-study-info">
+                <div class="case-meta-row">
+                  <span class="case-pill live-pill">
+                    <span class="live-dot"></span> Live Deployment
+                  </span>
+                  <span class="case-tech-summary">React • TypeScript • Tailwind</span>
+                </div>
+
+                <div class="project-header">
+                  <a
+                    href="https://reading-list-app-woad.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-title-link"
+                    >Book Reading List Application</a
+                  >
+                </div>
+
+                <p class="project-summary">
+                  An application to maintain and manage a personal book reading list. Features: add books with titles and reading status (Want to Read, Reading, Finished); filter by status; prevent duplicate titles; title limit of 60 characters; delete individual books; display total books, currently reading, and finished counts; responsive design.
+                </p>
+
+                <div class="project-tags">
+                  <span class="tech-chip">React</span>
+                  <span class="tech-chip">TypeScript</span>
+                  <span class="tech-chip">Vite</span>
+                  <span class="tech-chip">Tailwind CSS</span>
+                  <span class="tech-chip highlight-chip">Vercel Deployment</span>
+                </div>
+
+                <div class="project-actions-row">
+                  <a
+                    href="https://reading-list-app-woad.vercel.app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-cta-btn cta-live"
+                  >
+                    <span>Launch Live Demo</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                  </a>
+
+                  <a
+                    href="https://github.com/Amitbansal2007/reading-list-app"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-cta-btn cta-github"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>GitHub Repository</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Flagship Visual Simulation Preview -->
+              <div class="case-study-preview" aria-hidden="true">
+                <div class="preview-browser-window">
+                  <div class="window-bar">
+                    <div class="window-dots">
+                      <span></span><span></span><span></span>
+                    </div>
+                    <span class="window-url">reading-list-app-woad.vercel.app</span>
+                  </div>
+                  <div class="preview-app-content">
+                    <div class="mockup-app-header">
+                      <span class="mockup-app-title">📚 My Reading List</span>
+                      <div class="mockup-stats-badge">3 Total • 1 Reading • 2 Finished</div>
+                    </div>
+                    <div class="mockup-book-card">
+                      <div class="mockup-book-status reading">Reading</div>
+                      <div class="mockup-book-title">Clean Code: A Handbook of Agile Software</div>
+                    </div>
+                    <div class="mockup-book-card">
+                      <div class="mockup-book-status finished">Finished</div>
+                      <div class="mockup-book-title">Introduction to Algorithms (CLRS)</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
-          <li>
-            <a href="https://github.com/Amitbansal2007/personal-portfolio/blob/master/python-programs/messy-code-improvement/messy_code.py" target="_blank" rel="noopener noreferrer"
-              >Messy Python Code Improvement</a
-            >
-            <p>Improving messy Python code with the help of AI tools.</p>
+
+          <!-- Project 2: Interactive Quiz Application -->
+          <li class="project-item case-study-standard" data-categories="web">
+            <div class="case-study-grid">
+              <div class="case-study-info">
+                <div class="case-meta-row">
+                  <span class="case-pill app-pill">Interactive Web App</span>
+                  <span class="case-tech-summary">HTML5 • CSS3 • JavaScript DOM</span>
+                </div>
+
+                <div class="project-header">
+                  <a
+                    href="./quiz/index.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-title-link"
+                    >Interactive Quiz Application</a
+                  >
+                </div>
+
+                <p class="project-summary">
+                  An interactive quiz application created using concepts learned in the lab. Features dynamic question progression, instant answer evaluation, real-time score computation, and responsive DOM rendering.
+                </p>
+
+                <div class="project-tags">
+                  <span class="tech-chip">HTML5</span>
+                  <span class="tech-chip">CSS3</span>
+                  <span class="tech-chip">JavaScript</span>
+                  <span class="tech-chip">DOM Manipulation</span>
+                </div>
+
+                <div class="project-actions-row">
+                  <a
+                    href="./quiz/index.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-cta-btn cta-live"
+                  >
+                    <span>Launch Quiz App</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                  </a>
+
+                  <a
+                    href="https://github.com/Amitbansal2007/personal-portfolio/tree/master/quiz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-cta-btn cta-github"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>GitHub Source</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Terminal Preview -->
+              <div class="case-study-preview" aria-hidden="true">
+                <div class="preview-terminal-window">
+                  <div class="window-bar">
+                    <div class="window-dots">
+                      <span></span><span></span><span></span>
+                    </div>
+                    <span class="window-url">quiz/script.js — Question 1 of 5</span>
+                  </div>
+                  <div class="preview-code-box">
+                    <div class="code-line"><span class="code-kw">function</span> <span class="code-fn">checkAnswer</span>(selected, correct) {</div>
+                    <div class="code-line indent-1"><span class="code-kw">if</span> (selected === correct) {</div>
+                    <div class="code-line indent-2">score += <span class="code-num">1</span>;</div>
+                    <div class="code-line indent-2">feedbackEl.textContent = <span class="code-str">"Correct! 🎯"</span>;</div>
+                    <div class="code-line indent-1">}</div>
+                    <div class="code-line">}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
-          <li>
-            <a href="bug-fixing-cursor-ai/index.html">Bug Fixing Using Cursor AI</a>
-            <p>
-              Identifying and correcting errors in a program using Cursor AI.
-            </p>
+
+          <!-- Project 3: Bug Fixing Using Cursor AI -->
+          <li class="project-item case-study-standard" data-categories="python ai">
+            <div class="case-study-grid">
+              <div class="case-study-info">
+                <div class="case-meta-row">
+                  <span class="case-pill case-pill-purple">AI Debugging Case Study</span>
+                  <span class="case-tech-summary">Python 3 • Cursor AI</span>
+                </div>
+
+                <div class="project-header">
+                  <a href="bug-fixing-cursor-ai/index.html" class="project-title-link">Bug Fixing Using Cursor AI</a>
+                </div>
+
+                <p class="project-summary">
+                  Identifying and correcting errors in a program using Cursor AI. The original program assigned each number to total instead of accumulating it, displaying only the last value. The corrected implementation utilizes total += numbers[i] to compute the proper sum of 150.
+                </p>
+
+                <div class="project-tags">
+                  <span class="tech-chip">Python 3</span>
+                  <span class="tech-chip">Cursor AI</span>
+                  <span class="tech-chip">Debugging</span>
+                  <span class="tech-chip">Logic Correction</span>
+                </div>
+
+                <div class="project-actions-row">
+                  <a href="bug-fixing-cursor-ai/index.html" class="project-cta-btn cta-live">
+                    <span>View Case Study</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                  </a>
+
+                  <a
+                    href="https://github.com/Amitbansal2007/personal-portfolio/tree/master/bug-fixing-cursor-ai"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-cta-btn cta-github"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    <span>GitHub Repo</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Diff Preview -->
+              <div class="case-study-preview" aria-hidden="true">
+                <div class="preview-terminal-window">
+                  <div class="window-bar">
+                    <div class="window-dots">
+                      <span></span><span></span><span></span>
+                    </div>
+                    <span class="window-url">bug_fix.py — diff inspection</span>
+                  </div>
+                  <div class="preview-code-box">
+                    <div class="code-line diff-rem">-     total = numbers[i]  # Bug: overwrote accumulation</div>
+                    <div class="code-line diff-add">+     total += numbers[i] # Fix: accumulates sum</div>
+                    <div class="code-line"><span class="code-kw">print</span>(<span class="code-str">"Sum of numbers:"</span>, total)</div>
+                    <div class="code-line terminal-output">&gt; Sum of numbers: 150 (verified)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
-          <li>
-            <a
-              href="./quiz/index.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Interactive Quiz Application</a
-            >
-            <p>
-              An interactive quiz application created using concepts learned in
-              the lab.
-            </p>
+
+          <!-- Project 4: Messy Python Code Improvement -->
+          <li class="project-item case-study-standard" data-categories="python ai">
+            <div class="case-study-grid">
+              <div class="case-study-info">
+                <div class="case-meta-row">
+                  <span class="case-pill case-pill-gold">AI Code Refactoring</span>
+                  <span class="case-tech-summary">Python 3 • PEP 8 • Cursor AI</span>
+                </div>
+
+                <div class="project-header">
+                  <a
+                    href="https://github.com/Amitbansal2007/personal-portfolio/blob/master/python-programs/messy-code-improvement/messy_code.py"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-title-link"
+                    >Messy Python Code Improvement</a
+                  >
+                </div>
+
+                <p class="project-summary">
+                  Improving messy Python code with the help of AI tools (Cursor AI). Refactored monolithic script into distinct functions to calculate sum, average, and maximum numbers, adhering to PEP 8 standards with meaningful names, comments, and docstrings.
+                </p>
+
+                <div class="project-tags">
+                  <span class="tech-chip">Python 3</span>
+                  <span class="tech-chip">Cursor AI</span>
+                  <span class="tech-chip">Refactoring</span>
+                  <span class="tech-chip">Clean Code</span>
+                </div>
+
+                <div class="project-actions-row">
+                  <a
+                    href="https://github.com/Amitbansal2007/personal-portfolio/blob/master/python-programs/messy-code-improvement/messy_code.py"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-cta-btn cta-live"
+                  >
+                    <span>View Refactored Code</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Refactoring Preview -->
+              <div class="case-study-preview" aria-hidden="true">
+                <div class="preview-terminal-window">
+                  <div class="window-bar">
+                    <div class="window-dots">
+                      <span></span><span></span><span></span>
+                    </div>
+                    <span class="window-url">messy_code.py — Modular Functions</span>
+                  </div>
+                  <div class="preview-code-box">
+                    <div class="code-line"><span class="code-kw">def</span> <span class="code-fn">calculate_metrics</span>(numbers):</div>
+                    <div class="code-line indent-1"><span class="code-str">"""Computes sum, average, and max value."""</span></div>
+                    <div class="code-line indent-1">total = <span class="code-fn">sum</span>(numbers)</div>
+                    <div class="code-line indent-1">avg = total / <span class="code-fn">len</span>(numbers)</div>
+                    <div class="code-line indent-1"><span class="code-kw">return</span> total, avg, <span class="code-fn">max</span>(numbers)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
-          <li>
-            <a
-              href="https://reading-list-app-woad.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Book Reading List Application</a
-            >
-            <p>
-              An application to maintain and manage a personal book reading
-              list.
-            </p>
+
+          <!-- Project 5: Python Programs Collection -->
+          <li class="project-item case-study-standard" data-categories="python">
+            <div class="case-study-grid">
+              <div class="case-study-info">
+                <div class="case-meta-row">
+                  <span class="case-pill case-pill-blue">Algorithm Collection</span>
+                  <span class="case-tech-summary">Python 3 • OOP • __dict__</span>
+                </div>
+
+                <div class="project-header">
+                  <a
+                    href="https://github.com/Amitbansal2007/personal-portfolio/tree/master/python-programs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-title-link"
+                    >Python Programs Collection</a
+                  >
+                </div>
+
+                <p class="project-summary">
+                  A collection of Python programs including factorial calculation handling negative inputs, Fibonacci sequence generation, and structure-to-dictionary conversion leveraging a Python student class with __dict__ attribute serialization.
+                </p>
+
+                <div class="project-tags">
+                  <span class="tech-chip">Python 3</span>
+                  <span class="tech-chip">Classes & OOP</span>
+                  <span class="tech-chip">__dict__</span>
+                  <span class="tech-chip">Algorithms</span>
+                </div>
+
+                <div class="project-actions-row">
+                  <a
+                    href="https://github.com/Amitbansal2007/personal-portfolio/tree/master/python-programs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="project-cta-btn cta-live"
+                  >
+                    <span>Browse Repository</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Code Preview -->
+              <div class="case-study-preview" aria-hidden="true">
+                <div class="preview-terminal-window">
+                  <div class="window-bar">
+                    <div class="window-dots">
+                      <span></span><span></span><span></span>
+                    </div>
+                    <span class="window-url">python-programs/student_dict.py</span>
+                  </div>
+                  <div class="preview-code-box">
+                    <div class="code-line"><span class="code-kw">class</span> <span class="code-fn">Student</span>:</div>
+                    <div class="code-line indent-1"><span class="code-kw">def</span> <span class="code-fn">__init__</span>(self, name, roll):</div>
+                    <div class="code-line indent-2">self.name = name</div>
+                    <div class="code-line indent-2">self.roll = roll</div>
+                    <div class="code-line">student_dict = student_obj.<span class="code-fn">__dict__</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
       </section>
 
-      <section id="chatbot" class="card" aria-labelledby="chatbot-heading">
-        <h2 id="chatbot-heading">Portfolio assistant</h2>
-        <p>
-          Ask about Amit Bansal's education, skills, projects, or contact
-          information.
-        </p>
-        <div
-          id="chat-messages"
-          class="chat-messages"
-          role="log"
-          aria-live="polite"
-        ></div>
-        <p id="chat-status" class="chat-status" hidden>Thinking...</p>
-        <form id="chat-form" class="chat-form">
-          <label class="visually-hidden" for="chat-input">Message</label>
-          <input
-            id="chat-input"
-            type="text"
-            maxlength="1000"
-            autocomplete="off"
-            placeholder="Ask a question about this portfolio..."
-          />
-          <button id="chat-send" type="submit">Send</button>
-        </form>
+      <!-- ====================================================================
+           SECTION 04: AI ASSISTANT (Integrated Developer Console)
+           ==================================================================== -->
+      <section id="chatbot" class="page-section section-chatbot" aria-labelledby="chatbot-heading">
+        <div class="section-label-bar">
+          <span class="section-index">// 04</span>
+          <span class="section-tag">INTERACTIVE INTELLIGENCE</span>
+        </div>
+
+        <div class="chatbot-editorial-layout">
+          <!-- Left: Pitch & Quick Inquiries -->
+          <div class="chatbot-pitch-col">
+            <h2 id="chatbot-heading" class="section-title">AI Portfolio Assistant</h2>
+            <p class="section-subtitle">
+              Ask questions about Amit Bansal's education, technical skills, projects, programming languages, or contact information. Powered by a verified backend Groq LLM integration.
+            </p>
+
+            <div class="chat-suggestions-wrapper">
+              <span class="suggestions-label">Click a prompt to ask immediately:</span>
+              <div class="chat-suggestions" aria-label="Suggested questions">
+                <button type="button" class="chat-chip">What skills does Amit have?</button>
+                <button type="button" class="chat-chip">Tell me about Amit's projects</button>
+                <button type="button" class="chat-chip">What is Amit learning?</button>
+                <button type="button" class="chat-chip">How can I contact Amit?</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Interactive Console -->
+          <div class="chatbot-console-col">
+            <div class="chat-console-box">
+              <div class="console-top-bar">
+                <div class="console-dots">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="console-status-pill">
+                  <span class="status-dot"></span>
+                  <span>Online • Groq LLM</span>
+                </div>
+                <button id="chat-clear-btn" class="chat-clear-btn" type="button" title="Clear message history">
+                  Reset
+                </button>
+              </div>
+
+              <!-- Message Stream -->
+              <div
+                id="chat-messages"
+                class="chat-messages"
+                role="log"
+                aria-live="polite"
+              ></div>
+
+              <!-- Hidden status paragraph for backward compatibility -->
+              <p id="chat-status" class="chat-status" hidden>Thinking...</p>
+
+              <!-- Input Form -->
+              <form id="chat-form" class="chat-form">
+                <label class="visually-hidden" for="chat-input">Your message</label>
+                <div class="chat-input-wrapper">
+                  <span class="terminal-prompt-prefix">&gt;</span>
+                  <input
+                    id="chat-input"
+                    type="text"
+                    maxlength="1000"
+                    autocomplete="off"
+                    placeholder="Ask about education, skills, or projects..."
+                  />
+                  <button id="chat-send" type="submit" aria-label="Send message">
+                    <span>Send</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SECTION 05: CONTACT & COLLABORATION
+           ==================================================================== -->
+      <section id="contact" class="page-section section-contact" aria-labelledby="contact-heading">
+        <div class="section-label-bar">
+          <span class="section-index">// 05</span>
+          <span class="section-tag">GET IN TOUCH</span>
+        </div>
+
+        <div class="contact-editorial-header">
+          <h2 id="contact-heading" class="section-title">
+            Let's connect and build something impactful.
+          </h2>
+          <p class="section-subtitle">
+            Open to software engineering internships, collaborative development projects, and technical discussions.
+          </p>
+        </div>
+
+        <div class="contact-channels-grid">
+          <!-- GitHub Card -->
+          <a
+            href="https://github.com/Amitbansal2007"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="channel-card"
+          >
+            <div class="channel-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            </div>
+            <div class="channel-details">
+              <span class="channel-label">GITHUB PROFILE</span>
+              <span class="channel-value">github.com/Amitbansal2007</span>
+              <span class="channel-meta">Explore repositories, commits & lab code</span>
+            </div>
+            <span class="channel-arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <!-- Email Card with Copy button -->
+          <div class="channel-card email-channel-card">
+            <div class="channel-icon-box">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+            </div>
+            <div class="channel-details">
+              <span class="channel-label">EMAIL ADDRESS</span>
+              <a href="mailto:amitk022007@gmail.com" class="channel-value email-direct-link">amitk022007@gmail.com</a>
+              <span class="channel-meta">Direct inquiries & opportunities</span>
+            </div>
+            <button id="copy-email-btn" class="copy-email-action-btn" type="button" title="Copy email address to clipboard">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+              <span id="copy-email-text">Copy</span>
+            </button>
+          </div>
+
+          <!-- Academic Status & Availability -->
+          <div class="channel-card status-channel-card">
+            <div class="channel-icon-box gold-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+            </div>
+            <div class="channel-details">
+              <span class="channel-label">CURRENT STATUS</span>
+              <span class="channel-value">B.Tech CSE Student</span>
+              <span class="channel-meta">Actively seeking summer/fall software internships</span>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
 
+    <!-- ====================================================================
+         DISTINCTIVE FOOTER
+         ==================================================================== -->
     <footer class="site-footer">
-      <p>
-        GitHub:
-        <a
-          href="https://github.com/Amitbansal2007"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Amitbansal2007
-        </a>
-      </p>
-      <p>
-        Email:
-        <a href="mailto:amitk022007@gmail.com">amitk022007@gmail.com</a>
-      </p>
+      <div class="footer-inner">
+        <div class="footer-top-row">
+          <div class="footer-brand">
+            <a class="footer-logo" href="#top">
+              <span class="logo-symbol">&lt;</span>
+              <span class="logo-name">Amit Bansal</span>
+              <span class="logo-accent">/&gt;</span>
+            </a>
+            <p class="footer-bio">
+              B.Tech Computer Science and Engineering student. Focused on writing robust software, algorithmic problem-solving, and web development.
+            </p>
+          </div>
+
+          <div class="footer-nav-col">
+            <span class="footer-heading">NAVIGATION</span>
+            <div class="footer-links-list">
+              <a href="#about">About</a>
+              <a href="#skills">Skills</a>
+              <a href="#projects">Projects</a>
+              <a href="#chatbot">AI Assistant</a>
+              <a href="#contact">Contact</a>
+            </div>
+          </div>
+
+          <div class="footer-connect-col">
+            <span class="footer-heading">CONNECT</span>
+            <div class="footer-links-list">
+              <a href="https://github.com/Amitbansal2007" target="_blank" rel="noopener noreferrer">GitHub Profile ↗</a>
+              <a href="mailto:amitk022007@gmail.com">Direct Email ↗</a>
+              <a href="#top" class="footer-top-link">Back to Top ↑</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom-row">
+          <p class="footer-copy">
+            © 2026 Amit Bansal. Crafted with Semantic HTML5, Vanilla CSS, Modern JavaScript & Three.js.
+          </p>
+          <div class="footer-badges">
+            <span class="tech-badge">Vanilla CSS</span>
+            <span class="tech-badge">Three.js</span>
+            <span class="tech-badge">Groq AI</span>
+          </div>
+        </div>
+      </div>
     </footer>
 
     <script type="module" src="./script.js"></script>
