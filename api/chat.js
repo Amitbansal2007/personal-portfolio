@@ -6,12 +6,12 @@ const GROQ_MODEL = "openai/gpt-oss-20b";
 const MAX_MESSAGE_LENGTH = 1000;
 
 function loadLocalEnvFile() {
-  if (process.env.GROQ_API_KEY) {
-    return;
-  }
-
   try {
     const envPath = path.join(__dirname, "..", ".env.local");
+    if (!fs.existsSync(envPath)) {
+      return;
+    }
+
     const text = fs.readFileSync(envPath, "utf8").replace(/^\uFEFF/, "");
 
     text.split(/\r?\n/).forEach(function (rawLine) {
@@ -35,7 +35,7 @@ function loadLocalEnvFile() {
         value = value.slice(1, -1);
       }
 
-      if (name && process.env[name] === undefined) {
+      if (name) {
         process.env[name] = value;
       }
     });
@@ -243,11 +243,12 @@ module.exports = async function handler(req, res) {
 
   loadLocalEnvFile();
 
-  const apiKey = process.env.GROQ_API_KEY;
+  const apiKey = (process.env.GROQ_API_KEY || "").trim();
 
-  if (!apiKey) {
+  if (!apiKey || apiKey === "your_groq_api_key_here") {
     sendJson(res, 500, {
-      error: "The chat service is not configured yet.",
+      error:
+        "The AI assistant API key is not configured. Please add a valid GROQ_API_KEY in .env.local (for local dev) or in your Vercel project environment variables.",
     });
     return;
   }
@@ -283,6 +284,15 @@ module.exports = async function handler(req, res) {
       return;
     }
 
+    if (groqResponse.status === 401) {
+      console.error("Groq API error: 401 Invalid API Key (Key is invalid, expired, or revoked)");
+      sendJson(res, 401, {
+        error:
+          "The configured Groq API key is invalid or revoked. Please generate a new API key at https://console.groq.com/keys and update GROQ_API_KEY.",
+      });
+      return;
+    }
+
     if (groqResponse.status === 429) {
       sendJson(res, 429, {
         error: "The assistant is busy right now. Please try again in a moment.",
@@ -292,8 +302,11 @@ module.exports = async function handler(req, res) {
 
     if (!groqResponse.ok) {
       console.error("Groq API error:", groqResponse.status, groqData);
+      const upstreamMsg =
+        (groqData && groqData.error && groqData.error.message) ||
+        "The chat service could not complete this request.";
       sendJson(res, 502, {
-        error: "The chat service could not complete this request.",
+        error: upstreamMsg,
       });
       return;
     }

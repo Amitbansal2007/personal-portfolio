@@ -1,3 +1,6 @@
+import { marked } from "marked";
+import DOMPurify from "dompurify";
+
 // 1. Lazy load 3D Hero visualization for optimal initial page load performance
 if (document.getElementById("hero-3d-container")) {
   import("./hero3d.js")
@@ -196,7 +199,10 @@ if (copyEmailBtn) {
   });
 }
 
-// 6. AI Chatbot
+// 6. Floating AI Chatbot Assistant
+const chatWidget = document.getElementById("chat-widget");
+const chatLauncherBtn = document.getElementById("chat-launcher-btn");
+const chatCloseBtn = document.getElementById("chat-close-btn");
 const chatForm = document.getElementById("chat-form");
 const chatInput = document.getElementById("chat-input");
 const chatSend = document.getElementById("chat-send");
@@ -210,6 +216,7 @@ let conversationHistory = [];
 let typingIndicatorBubble = null;
 
 function escapeHtml(str) {
+  if (typeof str !== "string") return "";
   return str
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -218,136 +225,83 @@ function escapeHtml(str) {
     .replace(/'/g, "&#39;");
 }
 
-function formatInline(text) {
-  const codes = [];
-  const links = [];
+// Configure custom marked renderer
+const markdownRenderer = new marked.Renderer();
 
-  // 1. Protect inline code spans
-  let formatted = text.replace(/`([^`]+)`/g, function (_, code) {
-    codes.push("<code>" + code + "</code>");
-    return "\x00CODE" + (codes.length - 1) + "\x00";
-  });
+// Custom heading rendering: Keep heading sizes proportional within the chat widget bubble
+markdownRenderer.heading = function ({ text, depth }) {
+  const level = depth <= 2 ? 4 : (depth === 3 ? 4 : 5);
+  return `<h${level} class="chat-heading chat-h${level}">${text}</h${level}>`;
+};
 
-  // 2. Markdown links: [text](url) - strictly enforce https, http, or mailto protocols
-  formatted = formatted.replace(
-    /\[([^\]]+)\]\(((?:https?:\/\/|mailto:)[^\s"'\)]+)\)/g,
-    function (_, linkText, url) {
-      const isMail = url.startsWith("mailto:");
-      const targetAttr = isMail ? "" : ' target="_blank" rel="noopener noreferrer"';
-      links.push('<a href="' + url + '"' + targetAttr + ' class="chat-link">' + linkText + '</a>');
-      return "\x00LINK" + (links.length - 1) + "\x00";
+// Custom link rendering: strictly allow safe protocols, add target="_blank", rel="noopener noreferrer", and styling class
+markdownRenderer.link = function ({ href, title, text }) {
+  const cleanHref = (href || "").trim();
+  if (!/^(https?:\/\/|mailto:|#)/i.test(cleanHref)) {
+    return text;
+  }
+  const isMailto = cleanHref.startsWith("mailto:");
+  const targetAttr = isMailto ? "" : ' target="_blank" rel="noopener noreferrer"';
+  const titleAttr = title ? ` title="${escapeHtml(title)}"` : "";
+  return `<a href="${cleanHref}"${targetAttr}${titleAttr} class="chat-link">${text}</a>`;
+};
+
+// Custom fenced code blocks
+markdownRenderer.code = function ({ text, lang }) {
+  const langClass = lang ? ` language-${escapeHtml(lang)}` : "";
+  return `<pre class="chat-code-block"><code class="chat-code${langClass}">${escapeHtml(text)}</code></pre>`;
+};
+
+// Custom inline code spans
+markdownRenderer.codespan = function ({ text }) {
+  return `<code class="chat-inline-code">${escapeHtml(text)}</code>`;
+};
+
+// Custom horizontal rule
+markdownRenderer.hr = function () {
+  return '<hr class="chat-hr">';
+};
+
+// Initialize marked options
+marked.use({
+  renderer: markdownRenderer,
+  gfm: true,
+  breaks: true,
+});
+
+// Configure DOMPurify hook to ensure all external links are secure
+if (typeof DOMPurify !== "undefined" && typeof DOMPurify.addHook === "function") {
+  DOMPurify.addHook("afterSanitizeAttributes", function (node) {
+    if (node.tagName === "A") {
+      const href = node.getAttribute("href") || "";
+      if (!href.startsWith("mailto:") && !href.startsWith("#")) {
+        node.setAttribute("target", "_blank");
+        node.setAttribute("rel", "noopener noreferrer");
+      }
+      node.classList.add("chat-link");
     }
-  );
-
-  // 3. Standalone URLs (trim trailing punctuation like periods or commas)
-  formatted = formatted.replace(
-    /(^|[\s(])(https?:\/\/[^\s<>"')]+?)([.,;:!?]?(?:[\s)]|$))/g,
-    function (_, prefix, url, suffix) {
-      links.push('<a href="' + url + '" target="_blank" rel="noopener noreferrer" class="chat-link">' + url + '</a>');
-      return prefix + "\x00LINK" + (links.length - 1) + "\x00" + suffix;
-    }
-  );
-
-  // 4. Standalone email addresses (trim trailing punctuation)
-  formatted = formatted.replace(
-    /(^|[\s(])([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})([.,;:!?]?(?:[\s)]|$))/g,
-    function (_, prefix, email, suffix) {
-      links.push('<a href="mailto:' + email + '" class="chat-link">' + email + '</a>');
-      return prefix + "\x00LINK" + (links.length - 1) + "\x00" + suffix;
-    }
-  );
-
-  // 5. Bold: **text** or __text__
-  formatted = formatted.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-  formatted = formatted.replace(/__([^_]+)__/g, "<strong>$1</strong>");
-
-  // 6. Italic: *text* or _text_
-  formatted = formatted.replace(/(^|[\s(])\*([^*\n]+)\*([\s).,!?]|$)/g, "$1<em>$2</em>$3");
-  formatted = formatted.replace(/(^|[\s(])_([^_\n]+)_([\s).,!?]|$)/g, "$1<em>$2</em>$3");
-
-  // 7. Restore links and code
-  formatted = formatted.replace(/\x00LINK(\d+)\x00/g, function (_, idx) {
-    return links[Number(idx)];
   });
-
-  formatted = formatted.replace(/\x00CODE(\d+)\x00/g, function (_, idx) {
-    return codes[Number(idx)];
-  });
-
-  return formatted;
 }
 
 function renderSafeMarkdown(rawText) {
   if (!rawText) return "";
 
-  // Step 1: Escape HTML to strictly prevent XSS
-  const safeText = escapeHtml(rawText);
-  const lines = safeText.replace(/\r\n/g, "\n").split("\n");
-
-  const htmlBlocks = [];
-  let currentList = null;
-  let currentParagraphLines = [];
-
-  function flushParagraph() {
-    if (currentParagraphLines.length > 0) {
-      const content = currentParagraphLines.join("<br>");
-      if (content.trim()) {
-        htmlBlocks.push("<p>" + formatInline(content) + "</p>");
-      }
-      currentParagraphLines = [];
-    }
+  try {
+    const parsedHtml = marked.parse(rawText);
+    const cleanHtml = DOMPurify.sanitize(parsedHtml, {
+      ALLOWED_TAGS: [
+        "p", "br", "strong", "b", "em", "i", "del", "s", "code", "pre",
+        "ul", "ol", "li", "a", "h3", "h4", "h5", "h6",
+        "blockquote", "hr", "span"
+      ],
+      ALLOWED_ATTR: ["href", "target", "rel", "class", "title"],
+      ALLOW_DATA_ATTR: false,
+    });
+    return cleanHtml;
+  } catch (err) {
+    console.error("Markdown rendering error, falling back to safe escaped text:", err);
+    return "<p>" + escapeHtml(rawText).replace(/\n/g, "<br>") + "</p>";
   }
-
-  function flushList() {
-    if (currentList) {
-      const tag = currentList.type;
-      const itemsHtml = currentList.items
-        .map(function (item) {
-          return "<li>" + formatInline(item) + "</li>";
-        })
-        .join("");
-      htmlBlocks.push("<" + tag + ">" + itemsHtml + "</" + tag + ">");
-      currentList = null;
-    }
-  }
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    const trimmed = line.trim();
-
-    if (!trimmed) {
-      flushParagraph();
-      flushList();
-      continue;
-    }
-
-    const bulletMatch = line.match(/^(\s*)[-*•]\s+(.*)$/);
-    const numberMatch = line.match(/^(\s*)\d+\.\s+(.*)$/);
-
-    if (bulletMatch) {
-      flushParagraph();
-      if (!currentList || currentList.type !== "ul") {
-        flushList();
-        currentList = { type: "ul", items: [] };
-      }
-      currentList.items.push(bulletMatch[2]);
-    } else if (numberMatch) {
-      flushParagraph();
-      if (!currentList || currentList.type !== "ol") {
-        flushList();
-        currentList = { type: "ol", items: [] };
-      }
-      currentList.items.push(numberMatch[2]);
-    } else {
-      flushList();
-      currentParagraphLines.push(trimmed);
-    }
-  }
-
-  flushParagraph();
-  flushList();
-
-  return htmlBlocks.join("");
 }
 
 function scrollChatToBottom(smooth = true) {
@@ -434,6 +388,7 @@ async function submitChatMessage(messageText) {
   addChatMessage("user", message);
   if (chatInput) {
     chatInput.value = "";
+    chatInput.style.height = "auto";
   }
   setChatLoading(true);
 
@@ -498,25 +453,119 @@ function initChatWelcome() {
   }
 }
 
+// Widget Open / Close / Toggle Management
+function openChatWidget(focusInput = true) {
+  if (!chatWidget) return;
+  chatWidget.classList.add("is-open");
+  chatWidget.setAttribute("aria-hidden", "false");
+  if (chatLauncherBtn) {
+    chatLauncherBtn.setAttribute("aria-expanded", "true");
+    chatLauncherBtn.classList.add("is-active");
+  }
+  scrollChatToBottom(false);
+  if (focusInput && chatInput) {
+    setTimeout(function () {
+      chatInput.focus();
+    }, 120);
+  }
+}
+
+function closeChatWidget() {
+  if (!chatWidget) return;
+  chatWidget.classList.remove("is-open");
+  chatWidget.setAttribute("aria-hidden", "true");
+  if (chatLauncherBtn) {
+    chatLauncherBtn.setAttribute("aria-expanded", "false");
+    chatLauncherBtn.classList.remove("is-active");
+    chatLauncherBtn.focus();
+  }
+}
+
+function toggleChatWidget() {
+  if (!chatWidget) return;
+  if (chatWidget.classList.contains("is-open")) {
+    closeChatWidget();
+  } else {
+    openChatWidget(true);
+  }
+}
+
+// Attach Launcher and Close listeners
+if (chatLauncherBtn) {
+  chatLauncherBtn.addEventListener("click", toggleChatWidget);
+}
+
+if (chatCloseBtn) {
+  chatCloseBtn.addEventListener("click", closeChatWidget);
+}
+
+// Close on Escape key
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && chatWidget && chatWidget.classList.contains("is-open")) {
+    closeChatWidget();
+  }
+});
+
+// Wire navigation and page triggers for AI Assistant
+document.querySelectorAll('a[href="#chatbot"]').forEach(function (trigger) {
+  trigger.addEventListener("click", function (event) {
+    event.preventDefault();
+    openChatWidget(true);
+    if (mobileDrawer && mobileDrawer.classList.contains("open") && mobileMenuBtn) {
+      mobileMenuBtn.setAttribute("aria-expanded", "false");
+      mobileMenuBtn.classList.remove("active");
+      mobileDrawer.classList.remove("open");
+      mobileDrawer.setAttribute("aria-hidden", "true");
+    }
+  });
+});
+
+if (window.location.hash === "#chatbot") {
+  setTimeout(function () {
+    openChatWidget(true);
+  }, 350);
+}
+
+// Initialize welcome message once
 if (chatMessages) {
   initChatWelcome();
 }
 
+// Clear conversation button
 if (chatClearBtn) {
   chatClearBtn.addEventListener("click", function () {
     if (chatBusy) return;
     initChatWelcome();
     if (chatInput) {
       chatInput.value = "";
+      chatInput.style.height = "auto";
       chatInput.focus();
     }
   });
 }
 
+// Form submit & Enter-to-send (Shift+Enter for newline)
 if (chatForm && chatInput) {
   chatForm.addEventListener("submit", function (event) {
     event.preventDefault();
-    submitChatMessage(chatInput.value);
+    if (!chatBusy && chatInput.value.trim()) {
+      submitChatMessage(chatInput.value);
+    }
+  });
+
+  chatInput.addEventListener("keydown", function (event) {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      if (!chatBusy && chatInput.value.trim()) {
+        submitChatMessage(chatInput.value);
+      }
+    }
+  });
+
+  chatInput.addEventListener("input", function () {
+    this.style.height = "auto";
+    const newHeight = Math.min(this.scrollHeight, 100);
+    this.style.height = (newHeight > 36 ? newHeight : 36) + "px";
   });
 }
 
@@ -524,6 +573,7 @@ if (chatForm && chatInput) {
 chatChips.forEach(function (chip) {
   chip.addEventListener("click", function () {
     if (chatBusy) return;
+    openChatWidget(false);
     submitChatMessage(chip.textContent.trim());
   });
 });
