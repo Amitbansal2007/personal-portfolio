@@ -45,3 +45,8 @@ GitHub: https://github.com/Amitbansal2007
 - Implemented project searching and theme switching.
 - Used AI-assisted tools to improve and debug code.
 - Practiced GitHub repository management and Vercel deployment.
+## Latest Update
+
+- Updated portfolio project documentation.
+- Added information about website features.
+- Improved project description.
